@@ -62,13 +62,14 @@ return (
 
             <form onSubmit={submit} className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Full name</label>
+                    <label className="block text-sm font-medium text-gray-700">Name with initial</label>
                     <input
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         type="text"
                         className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-3"
-                        placeholder="Your full name"
+                        placeholder="A. B. S. Dharme"
+                        required
                     />
                 </div>
 
@@ -80,6 +81,7 @@ return (
                         type="email"
                         className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-3"
                         placeholder="you@example.com"
+                        required
                     />
                 </div>
 
@@ -92,6 +94,7 @@ return (
                             type="text"
                             className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-3"
                             placeholder="e.g. TG/20xx/xxxx"
+                            required
                         />
                     </div>
 
@@ -101,6 +104,7 @@ return (
                             name="level"
                             defaultValue=""
                             className="mt-1 block w-full rounded-md border-gray-200 p-3 bg-white"
+                            required
                         >
                             <option value="" disabled>
                                 Select level
@@ -124,6 +128,33 @@ return (
                 </div>
                 {/* End student details section */}
 
+                <div className='block text-sm font-medium text-gray-700'>
+                    <label htmlFor="Gender">Gender</label>
+                    <div className="mt-2 flex items-center space-x-6">
+                        <label className="inline-flex items-center">
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="male"
+                                className="h-4 w-5 text-emerald-600 border-gray-300"
+                                required
+                            />
+                            <span className="ml-2 text-sm text-gray-700">Male</span>
+                        </label>
+
+                        <label className="inline-flex items-center">
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="female"
+                                className="h-4 w-5 text-emerald-600 border-gray-300"
+                                required
+                            />
+                            <span className="ml-2 text-sm text-gray-700">Female</span>
+                        </label>
+                    </div>
+                </div>
+
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Password</label>
                     <input
@@ -132,6 +163,7 @@ return (
                         type="password"
                         className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-3"
                         placeholder="Choose a password"
+                        required
                     />
                 </div>
 
