@@ -91,7 +91,7 @@ return (
                             name="registrationNumber"
                             type="text"
                             className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-3"
-                            placeholder="e.g. REG2023/001"
+                            placeholder="e.g. TG/20xx/xxxx"
                         />
                     </div>
 
@@ -100,7 +100,7 @@ return (
                         <select
                             name="level"
                             defaultValue=""
-                            className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-3 bg-white"
+                            className="mt-1 block w-full rounded-md border-gray-200 p-3 bg-white"
                         >
                             <option value="" disabled>
                                 Select level
@@ -118,7 +118,7 @@ return (
                             name="phone"
                             type="tel"
                             className="mt-1 block w-full rounded-md border-gray-200 shadow-sm p-3"
-                            placeholder="+233 24 000 0000"
+                            placeholder="070 000 0000"
                         />
                     </div>
                 </div>
