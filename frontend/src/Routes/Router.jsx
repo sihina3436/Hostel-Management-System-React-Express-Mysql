@@ -4,6 +4,7 @@ import Home from '../Home';
 import App from '../App';
 import Login from '../Login';
 import Register from '../Register';
+import UserDashboard from '../dashboard/user/main/UserDashboard';
 
 const Router = createBrowserRouter([
     {
@@ -13,6 +14,7 @@ const Router = createBrowserRouter([
             {path: '/', element: <Home /> },
             {path: '/login', element: <Login /> },
             {path: '/register', element: <Register /> },
+            {path: '/dashboard', element: <UserDashboard /> },
         ],
     }
 ]);
