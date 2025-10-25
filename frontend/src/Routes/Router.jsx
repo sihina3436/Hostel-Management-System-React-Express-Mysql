@@ -4,8 +4,11 @@ import App from '../App';
 import Login from '../Login';
 import Register from '../Register';
 import StudentDashboard from '../Pages/StudentDashboard';
+import AdminDashboard from '../Pages/AdminDashboard';
 
 const Router = createBrowserRouter([
+    // Admin Dashboard Route
+    { path: '/admin-dashboard', element: <AdminDashboard /> },
     // Student Dashboard Route
     { path: '/student-dashboard', element: <StudentDashboard /> },
     
