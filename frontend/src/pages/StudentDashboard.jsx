@@ -258,6 +258,16 @@ const StudentDashboard = () => {
                 <button
                   onClick={() => {
                     setAvatarOpen(false);
+                    openEditModal();
+                  }}
+                  className="w-full text-left px-3 py-2 rounded hover:bg-gray-100 text-sm text-gray-700 flex items-center gap-2"
+                >
+                  <i className="ri-edit-box-line" />
+                  Edit profile
+                </button>
+                <button
+                  onClick={() => {
+                    setAvatarOpen(false);
                     handleLogout();
                   }}
                   className="w-full text-left px-3 py-2 rounded hover:bg-gray-100 text-sm text-gray-700 flex items-center gap-2"
@@ -359,6 +369,64 @@ const StudentDashboard = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <Header />
+
+      {/* Edit profile modal */}
+      {showEditModal && (
+        <>
+          <div className="fixed inset-0 z-40 bg-black opacity-40" onClick={closeEditModal} />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="w-full max-w-2xl bg-white rounded shadow-lg p-6">
+              <h3 className="text-lg font-medium mb-4">Edit Profile</h3>
+
+              {editMessage && (
+                <div className={`p-2 rounded mb-4 ${editMessage.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                  {editMessage.text}
+                </div>
+              )}
+
+              <form onSubmit={handleEditSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-gray-600">Name</label>
+                    <input value={editName} onChange={(e) => setEditName(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600">Email</label>
+                    <input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-gray-600">Registration No</label>
+                    <input value={editRegNo} onChange={(e) => setEditRegNo(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600">Room Number</label>
+                    <input value={editRoomNumber} onChange={(e) => setEditRoomNumber(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-gray-600">Hostel Name</label>
+                    <input value={editHostelName} onChange={(e) => setEditHostelName(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-600">Hostel Contact</label>
+                    <input value={editHostelContact} onChange={(e) => setEditHostelContact(e.target.value)} className="mt-1 w-full border rounded px-3 py-2" />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-end gap-3">
+                  <button type="button" onClick={closeEditModal} className="px-4 py-2 rounded border">Cancel</button>
+                  <button type="submit" className="bg-emerald-600 text-white px-4 py-2 rounded">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </>
+      )}
 
       {loading && <p className="text-gray-600">Loading...</p>}
       {error && <div className="p-3 bg-red-100 text-red-700 rounded">{error}</div>}
