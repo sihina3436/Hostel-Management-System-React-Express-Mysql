@@ -8,6 +8,8 @@ const AdminDashboard = () => {
   const [admin, setAdmin] = useState(null);
   const [students, setStudents] = useState([]);
   const [staff, setStaff] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [studentQuery, setStudentQuery] = useState("");
   const [selected, setSelected] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
@@ -33,7 +35,12 @@ const AdminDashboard = () => {
       regNo: `REG-2025-${100 + i}`,
       roomNumber: `B-${100 + i}`,
       hostel: { name: `Central Boys Hostel` },
-      billing: { outstanding: (Math.round(Math.random() * 200 * 100) / 100).toFixed(2), recent: [{ id: 1, title: "Rent", amount: "60.00", status: "Paid" }] },
+      billing: {
+        outstanding: (Math.round(Math.random() * 200 * 100) / 100).toFixed(2),
+        recent: [
+          { id: 1, title: "Rent", amount: "20.00", status: i % 2 === 0 ? "Paid" : "Unpaid" },
+        ],
+      },
       contact: `+1 555-000-${100 + i}`,
     }));
 
@@ -87,6 +94,11 @@ const AdminDashboard = () => {
     setTimeout(() => setShowEditModal(false), 300);
   };
 
+  //Notification delete fcuntion
+  const deleteNotification = (id) => {
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+};
+
   const menuItems = [
     { id: "overview", label: "Overview", icon: "ri-dashboard-line" },
     { id: "students", label: "Students", icon: "ri-group-line" },
@@ -131,20 +143,41 @@ const AdminDashboard = () => {
 
   const renderStudents = () => (
     <div className="bg-white rounded shadow p-4">
-      <h3 className="font-medium mb-4">Students</h3>
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-medium">Students</h3>
+        <div className="w-72">
+          <input
+            type="text"
+            value={studentQuery}
+            onChange={(e) => setStudentQuery(e.target.value)}
+            placeholder="Search by name or reg no"
+            className="w-full border rounded px-3 py-1 text-sm"
+          />
+        </div>
+      </div>
+
       <div className="space-y-2">
-        {students.map((s) => (
-          <div key={s.id} className="flex items-center justify-between p-3 border rounded">
-            <div>
-              <div className="font-medium">{s.name}</div>
-              <div className="text-sm text-gray-500">{s.regNo} • {s.roomNumber}</div>
+        {students
+          .filter((s) => {
+            if (!studentQuery) return true;
+            const q = studentQuery.toLowerCase();
+            return (
+              s.name.toLowerCase().includes(q) ||
+              s.regNo.toLowerCase().includes(q) ||
+              (s.roomNumber || "").toLowerCase().includes(q)
+            );
+          })
+          .map((s) => (
+            <div key={s.id} className="flex items-center justify-between p-3 border rounded">
+              <div>
+                <div className="font-medium">{s.name}</div>
+                <div className="text-sm text-gray-500">{s.regNo} • {s.roomNumber}</div>
+              </div>
+              <div className="flex items-center gap-3">
+                <button onClick={() => openStudent(s)} className="px-3 py-1 bg-emerald-600 text-white rounded">View</button>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="text-sm text-gray-700">${s.billing.outstanding}</div>
-              <button onClick={() => openStudent(s)} className="px-3 py-1 bg-emerald-600 text-white rounded">View</button>
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
@@ -158,6 +191,7 @@ const AdminDashboard = () => {
             <th className="pb-2">Student</th>
             <th className="pb-2">Reg No</th>
             <th className="pb-2">Outstanding</th>
+            <th className="pb-2">Status</th>
             <th className="pb-2">Action</th>
           </tr>
         </thead>
@@ -167,6 +201,7 @@ const AdminDashboard = () => {
               <td className="py-2">{s.name}</td>
               <td className="py-2">{s.regNo}</td>
               <td className="py-2">${s.billing.outstanding}</td>
+              <td className="py-2">{s.billing.recent?.[0]?.status === 'Paid' ? 'Paid' : 'Unpaid'}</td>
               <td className="py-2"><button onClick={() => openStudent(s)} className="px-2 py-1 bg-gray-100 rounded">Details</button></td>
             </tr>
           ))}
@@ -202,7 +237,57 @@ const AdminDashboard = () => {
   );
 
   const renderNotifications = () => (
-    <div className="bg-white rounded shadow p-4">No notifications</div>
+    <div className="bg-white rounded shadow p-4">
+      <h3 className="font-medium mb-3">Notifications</h3>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const form = e.target;
+          const title = form.title.value.trim();
+          const body = form.body.value.trim();
+          if (!title && !body) return;
+          const n = { id: Date.now(), title: title || 'Notice', body, createdAt: new Date().toISOString() };
+          setNotifications((s) => [n, ...s]);
+          form.reset();
+        }}
+        className="space-y-3 mb-4"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <input name="title" placeholder="Title (optional)" className="border rounded px-3 py-2" />
+          <input name="body" placeholder="Short message" className="border rounded px-3 py-2" />
+        </div>
+        <div className="flex justify-end">
+          <button type="submit" className="px-4 py-2 bg-emerald-600 text-white rounded">Post Notification</button>
+        </div>
+      </form>
+
+      {notifications.length === 0 ? (
+        <div className="text-sm text-gray-500">No notifications yet.</div>
+      ) : (
+        <ul className="space-y-2">
+          {notifications.map((n) => (
+        <li key={n.id} className="p-3 border rounded flex items-start justify-between">
+            <div>
+                <div className="font-medium">{n.title}</div>
+                <div className="text-sm text-gray-600">{n.body}</div>
+                <div className="text-xs text-gray-400 mt-1">{new Date(n.createdAt).toLocaleString()}</div>
+            </div>
+
+            <button
+                onClick={() => {
+                    if (window.confirm("Are you sure you want to delete this notification?")) {
+                        deleteNotification(n.id);
+                    }}}
+                className="ml-4 px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 text-xs"
+                >
+                Delete
+            </button>
+            </li>
+            ))}
+        </ul>
+      )}
+    </div>
   );
 
   if (loading) return <div className="p-6">Loading...</div>;
