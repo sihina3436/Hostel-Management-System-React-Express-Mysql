@@ -309,7 +309,16 @@ const StudentDashboard = () => {
 
     if (selected === "profile") {
       return (
-        <div className="p-6 bg-white rounded shadow">
+        <div className="p-6 bg-white rounded shadow relative">
+          <button
+            onClick={openEditModal}
+            className="absolute top-3 right-3 p-2 rounded hover:bg-gray-100 text-gray-600"
+            aria-label="Edit profile"
+            title="Edit profile"
+          >
+            <i className="ri-edit-line text-lg" />
+          </button>
+
           <h3 className="font-medium text-lg mb-4">Profile</h3>
           <p><strong>Name:</strong> {student?.name}</p>
           <p><strong>Email:</strong> {student?.email}</p>
