@@ -73,7 +73,7 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-green-50 flex flex-col md:flex-row p-6 md:p-12 gap-8">
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row p-6 md:p-12 gap-8">
       {activeSection === "overview" && (
         <div className="md:w-1/3 bg-white rounded-3xl shadow-lg p-8 mr-10 flex flex-col items-center justify-start border border-green-100">
           <img
@@ -81,16 +81,16 @@ const UserDashboard = () => {
             alt={`${user.name}'s avatar`}
             className="w-32 h-32 rounded-full border-4 border-green-400 mb-4 shadow-md"
           />
-          <h2 className="text-2xl font-bold text-green-800 mb-1">{user.name}</h2>
-          <p className="text-gray-600">{user.Registration}</p>
+          <h2 className="text-2xl font-bold text-gray-800 mb-1">{user.name}</h2>
+          <p className="text-gray-600 font-bold">{user.Registration}</p>
           <div className="mt-6 space-y-2 text-center w-full">
-            <p className="bg-green-100 text-green-800 py-2 rounded-lg font-medium">
+            <p className="bg-gray-100 text-green-800 py-2 rounded-lg font-medium">
               Room No: {user.room}
             </p>
-            <p className="bg-green-100 text-green-800 py-2 rounded-lg font-medium">
+            <p className="bg-gray-100 text-green-800 py-2 rounded-lg font-medium">
               Level: {user.Level}
             </p>
-            <p className="bg-green-100 text-green-800 py-2 rounded-lg font-medium">
+            <p className="bg-gray-100 text-green-800 py-2 rounded-lg font-medium">
               Joined: {user.joined}
             </p>
           </div>
@@ -107,10 +107,10 @@ const UserDashboard = () => {
       <div className={activeSection === "overview" ? "flex-1" : "w-full"}>
         {activeSection === "overview" && (
           <div className="mb-6">
-            <h1 className="text-2xl sm:text-3xl font-bold text-green-800 mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-700 mb-2">
               Welcome back, {user.name}!
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-800">
               Select an option below to manage your hostel activities.
             </p>
           </div>
