@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 
 const UpdateProfile = () => {
-  const [avatar, setAvatar] = useState("https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
-  const [preview, setPreview] = useState(avatar);
+  // const [avatar, setAvatar] = useState("https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
+  // const [preview, setPreview] = useState(avatar);
 
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatar(URL.createObjectURL(file));
-      setPreview(URL.createObjectURL(file));
-    }
-  };
+  // const handleAvatarChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setAvatar(URL.createObjectURL(file));
+  //     setPreview(URL.createObjectURL(file));
+  //   }
+  // };
 
   return (
     <div className="max-w-4xl mx-auto bg-white p-12">
       {/* Heading */}
-      <h2 className="text-3xl font-bold text-green-700 text-center -mt-12 mb-10">
+      <h2 className="text-3xl font-bold text-green-700 text-center -mt-12 mb-16">
         Update Profile
       </h2>
 
-      {/* Avatar Upload */}
+      {/* Avatar Upload
       <div className="flex flex-col items-center mb-8">
         <img
           src={preview}
@@ -32,7 +32,7 @@ const UpdateProfile = () => {
           onChange={handleAvatarChange}
           className="text-sm text-gray-600 border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-green-400"
         />
-      </div>
+      </div> */}
 
       <form className="space-y-6">
         {/* Full Name & Registration */}
