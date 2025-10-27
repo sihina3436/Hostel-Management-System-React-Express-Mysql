@@ -4,6 +4,7 @@ import Home from "../Home";
 import Login from "../Login";
 import Register from "../Register";
 import UserDashboard from "../dashboard/user/main/UserDashboard";
+import AdminDashboard from "../dashboard/admin/AdminDashboard";
 
 const Router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const Router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/dashboard", element: <UserDashboard /> },
+      { path: "/admin-dashboard", element: <AdminDashboard /> },
     ],
   },
 ]);
