@@ -1,27 +1,21 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Home from '../Home';
-import App from '../App';
-import Login from '../Login';
-import Register from '../Register';
-import StudentDashboard from '../Pages/StudentDashboard';
-import AdminDashboard from '../Pages/AdminDashboard';
+import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+import Home from "../Home";
+import Login from "../Login";
+import Register from "../Register";
+import UserDashboard from "../dashboard/user/main/UserDashboard";
 
 const Router = createBrowserRouter([
-    // Admin Dashboard Route
-    { path: '/admin-dashboard', element: <AdminDashboard /> },
-    // Student Dashboard Route
-    { path: '/student-dashboard', element: <StudentDashboard /> },
-    
-    // Main app layout (includes NavBar and Footer) with nested routes
-    {
-        path: '/',
-        element: <App />,
-        children: [
-            { path: '/', element: <Home /> },
-            { path: '/login', element: <Login /> },
-            { path: '/register', element: <Register /> },
-        ],
-    },
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+      { path: "/dashboard", element: <UserDashboard /> },
+    ],
+  },
 ]);
 
 export default Router;
