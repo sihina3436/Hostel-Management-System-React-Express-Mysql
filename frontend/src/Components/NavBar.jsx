@@ -26,26 +26,10 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/rooms"
-              className="text-white hover:text-emerald-200 transition-colors duration-300"
-            >
-              Rooms
-            </Link>
-          </li>
-          <li>
-            <Link
               to="/dashboard"
               className="text-white hover:text-emerald-200 transition-colors duration-300"
             >
               Students
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/contact"
-              className="text-white hover:text-emerald-200 transition-colors duration-300"
-            >
-              Contact
             </Link>
           </li>
         </ul>

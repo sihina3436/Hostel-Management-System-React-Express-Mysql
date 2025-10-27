@@ -6,9 +6,6 @@ const RoomDetails = () => {
     type: "Sharing",
     floor: "4th Floor",
     building: "Girls Hostel - Block A",
-    assignedDate: "January 5, 2025",
-    checkInDate: "January 6, 2025",
-    checkOutDate: "December 20, 2025",
     capacity: 4,
     availability: "0 Slots Left",
   };
@@ -44,14 +41,14 @@ const RoomDetails = () => {
     },
   ];
 
-  const roomItems = [
-    "02 Double Beds with Mattress",
-    "02 Cupboard",
-    "04 Study Table & Chair",
-    "01 Ceiling Fan",
-    "02 LED Lights",
-    "02 Cloth Racks",
-  ];
+  // const roomItems = [
+  //   "02 Double Beds with Mattress",
+  //   "02 Cupboard",
+  //   "04 Study Table & Chair",
+  //   "01 Ceiling Fan",
+  //   "02 LED Lights",
+  //   "02 Cloth Racks",
+  // ];
 
   return (
     <div className="max-w-5xl mx-auto bg-white p-10 space-y-10">
@@ -61,19 +58,16 @@ const RoomDetails = () => {
       </h2>
 
       {/* Room Info */}
-      <div className="grid md:grid-cols-2 gap-6 bg-green-50 p-6 rounded-xl border border-green-200 shadow-sm">
+      <div className="grid md:grid-cols-2 gap-6 bg-gray-50 p-6 rounded-xl border border-green-200 shadow-sm">
         <div className="space-y-2">
           <p className="text-gray-700"><strong>Room No:</strong> {roomInfo.number}</p>
           <p className="text-gray-700"><strong>Type:</strong> {roomInfo.type}</p>
           <p className="text-gray-700"><strong>Floor:</strong> {roomInfo.floor}</p>
-          <p className="text-gray-700"><strong>Building:</strong> {roomInfo.building}</p>
         </div>
         <div className="space-y-2">
           <p className="text-gray-700"><strong>Capacity:</strong> {roomInfo.capacity} Students</p>
           <p className="text-gray-700"><strong>Availability:</strong> {roomInfo.availability}</p>
-          <p className="text-gray-700"><strong>Checked-in Date:</strong> {roomInfo.checkInDate}</p>
-          <p className="text-gray-700"><strong>Check-out Date:</strong> {roomInfo.checkOutDate}</p>
-          <p className="text-gray-700"><strong>Cleaning Schedule:</strong> {roomInfo.cleaningSchedule}</p>
+          <p className="text-gray-700"><strong>Building:</strong> {roomInfo.building}</p>
         </div>
       </div>
 
@@ -102,7 +96,7 @@ const RoomDetails = () => {
         </div>
       </div>
 
-      {/* Room Items */}
+      {/* Room Items
       <div>
         <h3 className="text-xl font-semibold text-green-700 mb-6">Assigned Room Items</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -116,7 +110,7 @@ const RoomDetails = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
