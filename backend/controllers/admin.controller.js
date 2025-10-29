@@ -36,3 +36,14 @@ exports.updateHostel = async (req, res) => {
     res.status(500).json({ message: "Error updating hostel" });
   }
 };
+
+exports.deleteHostel = async (req, res) => {
+  try {
+    const hostel = await Hostel.findByPk(req.params.id);
+    if (!hostel) return res.status(404).json({ message: "Hostel not found" });
+    await hostel.destroy();
+    res.json({ message: "✅ Hostel deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting hostel" });
+  }
+};
