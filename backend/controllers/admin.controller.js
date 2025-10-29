@@ -1,0 +1,19 @@
+const { Sequelize } = require("sequelize");
+const sequelize = require("../configurations/dbconnection.js");
+const Admin = require("../models/admin.model.js");
+const Hostel = require("../models/hostel.model.js");
+const Rooms = require("../models/room.model.js");
+const Student = require("../models/student.model.js");
+const Staff = require("../models/staff.model.js");
+const Bill = require("../models/bill.model.js");
+
+
+exports.createHostel = async (req, res) => {
+  try {
+    const hostel = await Hostel.create(req.body);
+    res.status(201).json({ message: "✅ Hostel created successfully", hostel });
+  } catch (err) {
+    res.status(500).json({ message: "Error creating hostel", error: err.message });
+  }
+};
+
