@@ -16,6 +16,8 @@ require("./models/staff.model");
 
 // Import setup scripts (functions only)
 const { createAssignStudentProcedure } = require("./procedures/setupProcedures");
+const { createRoomCapacityTrigger } = require("./triggers/setupTriggers");
+const { createViews } = require("./views/setupViews");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -41,6 +43,11 @@ app.get("/", (req, res) => {
 
     await sequelize.sync({ alter: true }); // sync models to DB
     console.log("✅ All models synced successfully!");
+
+    await createRoomCapacityTrigger();
+    await createAssignStudentProcedure();
+    await createViews();
+    
 
     // Start server
     app.listen(PORT, () => {
