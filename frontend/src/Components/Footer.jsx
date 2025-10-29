@@ -13,7 +13,14 @@ const Footer = () => {
           <p className="text-s text-white/90">
             Simplify hostel operations with our smart management system. Manage rooms, students, and maintenance efficiently.
           </p>
-            <div className="flex pt-10 space-x-6 text-2xl">
+            
+
+        </div>
+
+        {/* Quick Links */}
+        <div className="space-y-2 text-center sm:text-left">
+          <h4 className="text-md font-bold text-white">Follow us on</h4>
+          <div className="flex pt-4 space-x-6 text-2xl">
                       <a href="#" className="hover:text-emerald-200 transition-colors transform hover:scale-110 duration-300">
                           <RiFacebookFill />
                       </a>
@@ -21,19 +28,6 @@ const Footer = () => {
                           <RiLinkedinBoxFill />
                       </a>
             </div>
-
-        </div>
-
-        {/* Quick Links */}
-        <div className="space-y-2 text-center sm:text-left">
-          <h4 className="text-md font-bold text-white">Quick Links</h4>
-          <ul className="space-y-1 text-white/90">
-            <li><Link to="/" className="hover:text-emerald-200 transition-colors">Home</Link></li>
-            <li><Link to="/rooms" className="hover:text-emerald-200 transition-colors">Rooms</Link></li>
-            <li><Link to="/students" className="hover:text-emerald-200 transition-colors">Students</Link></li>
-            <li><Link to="/about" className="hover:text-emerald-200 transition-colors">About</Link></li>
-            <li><Link to="/contact" className="hover:text-emerald-200 transition-colors">Contact</Link></li>
-          </ul>
         </div>
 
         {/* Contact Info */}
