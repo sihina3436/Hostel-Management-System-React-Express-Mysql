@@ -19,7 +19,13 @@ const UserDashboard = () => {
     room: "G-427",
     joined: "January 2025",
     Level: "Level 03",
+    gender: "female",
   };
+
+  const avatarUrl =
+    user.gender === "male"
+      ? "https://cdn-icons-png.flaticon.com/512/236/236832.png"
+      : "https://cdn-icons-png.flaticon.com/512/6997/6997662.png";
 
   const renderRightSection = () => {
     if (activeSection === "overview") {
@@ -77,9 +83,9 @@ const UserDashboard = () => {
       {activeSection === "overview" && (
         <div className="md:w-1/3 bg-white rounded-3xl shadow-lg p-8 mr-10 flex flex-col items-center justify-start border border-green-100">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            src={avatarUrl}
             alt={`${user.name}'s avatar`}
-            className="w-32 h-32 rounded-full border-4 border-green-400 mb-4 shadow-md"
+            className="w-32 h-32 rounded-full border-4 border-green-400 mb-4 shadow-md object-cover"
           />
           <h2 className="text-2xl font-bold text-gray-800 mb-1">{user.name}</h2>
           <p className="text-gray-600 font-bold">{user.Registration}</p>

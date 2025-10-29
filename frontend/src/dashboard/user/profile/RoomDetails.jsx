@@ -16,39 +16,31 @@ const RoomDetails = () => {
       phone: "+94 77 123 4567",
       department: "ICT",
       level: "3",
-      avatar: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     },
     {
       name: "Sihara Edirisinghe",
       phone: "+94 71 987 6543",
       department: "ICT",
       level: "1",
-      avatar: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     },
     {
       name: "Hiruni Perera",
       phone: "+94 77 555 1234",
       department: "ICT",
       level: "2",
-      avatar: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     },
     {
       name: "Devindi Silva",
       phone: "+94 77 888 4321",
       department: "ICT",
       level: "2",
-      avatar: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
     },
   ];
 
-  // const roomItems = [
-  //   "02 Double Beds with Mattress",
-  //   "02 Cupboard",
-  //   "04 Study Table & Chair",
-  //   "01 Ceiling Fan",
-  //   "02 LED Lights",
-  //   "02 Cloth Racks",
-  // ];
+  const getAvatar = (roomNumber) =>
+    roomNumber.startsWith("G")
+      ? "https://cdn-icons-png.flaticon.com/512/6997/6997662.png" // Female
+      : "https://cdn-icons-png.flaticon.com/512/236/236832.png"; // Male
 
   return (
     <div className="max-w-5xl mx-auto bg-white p-10 space-y-10">
@@ -81,7 +73,7 @@ const RoomDetails = () => {
               className="flex gap-4 bg-white p-5 rounded-xl border border-green-100 shadow hover:shadow-md transition duration-200"
             >
               <img
-                src={member.avatar}
+                src={getAvatar(roomInfo.number)}
                 alt={member.name}
                 className="w-16 h-16 rounded-full border-2 border-green-400 object-cover"
               />
@@ -95,22 +87,6 @@ const RoomDetails = () => {
           ))}
         </div>
       </div>
-
-      {/* Room Items
-      <div>
-        <h3 className="text-xl font-semibold text-green-700 mb-6">Assigned Room Items</h3>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {roomItems.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-100 shadow hover:shadow-md transition duration-200"
-            >
-              <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-              <span className="text-gray-800 font-medium">{item}</span>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </div>
   );
 };
