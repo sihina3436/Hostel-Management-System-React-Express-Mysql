@@ -13,11 +13,19 @@ require("./models/room.model");
 require("./models/student.model");
 require("./models/staff.model");
 
+
+// Import setup scripts (functions only)
+const { createAssignStudentProcedure } = require("./procedures/setupProcedures");
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+
+const studentRoutes = require("./routes/studentRoutes.js");
+
+app.use("/api/students", studentRoutes);
 
 // Test route
 app.get("/", (req, res) => {
