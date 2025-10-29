@@ -17,3 +17,11 @@ exports.createHostel = async (req, res) => {
   }
 };
 
+exports.getAllHostels = async (req, res) => {
+  try {
+    const hostels = await Hostel.findAll();
+    res.json(hostels);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching hostels" });
+  }
+};
