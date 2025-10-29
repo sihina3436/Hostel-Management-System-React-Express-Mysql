@@ -1,6 +1,7 @@
 import React from "react";
 import { RiHomeSmileLine, RiUser3Line, RiToolsLine } from "react-icons/ri";
 import Hero from "./Assets/hero.svg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -20,9 +21,11 @@ const Home = () => {
             operations smarter, faster, and more efficient.
           </p>
           <div className="mt-4">
+            <Link to="/login">
             <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg transform hover:scale-105 transition duration-300">
               Get Started
             </button>
+            </Link>
           </div>
         </div>
 
