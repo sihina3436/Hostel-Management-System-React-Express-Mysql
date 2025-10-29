@@ -54,13 +54,61 @@ async function studentLogin(req, res) {
   }
 }
 
+async function changePassword(req, res) {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    // Check if both fields are provided
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide current and new password",
+      });
+    }
+
+    // Find the student by ID from JWT payload (added by authenticateStudent middleware)
+    const student = await Student.findByPk(req.user.stud_id || req.user.id);
+
+    if (!student) {
+      return res.status(404).json({
+        success: false,
+        message: "Student not found",
+      });
+    }
+
+    // Compare plain text passwords (no bcrypt)
+    if (student.password !== currentPassword) {
+      return res.status(401).json({
+        success: false,
+        message: "Current password is incorrect",
+      });
+    }
+
+    // Update password
+    await student.update({ password: newPassword });
+
+    return res.status(200).json({
+      success: true,
+      message: "✅ Password changed successfully",
+    });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error changing password",
+      error: error.message,
+    });
+  }
+}
+
 
 
 
 
 
 module.exports = {
-  studentLogin
+  studentLogin,
+  changePassword
 
 
 };
