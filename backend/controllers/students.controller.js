@@ -101,6 +101,26 @@ async function changePassword(req, res) {
   }
 }
 
+async function getProfile(req, res) {
+  try {
+    const studentId = req.params.id;
+
+    // Call stored procedure
+    const [result] = await sequelize.query(
+      "CALL GetStudentProfile(:student_id);",
+      { replacements: { student_id: studentId } }
+    );
+
+    if (!result || result.length === 0)
+      return res.status(404).json({ success: false, message: "Student not found" });
+
+    res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    console.error("❌ Error fetching profile:", error.message);
+    res.status(500).json({ success: false, message: "Error fetching profile" });
+  }
+};
+
 
 
 
@@ -108,7 +128,8 @@ async function changePassword(req, res) {
 
 module.exports = {
   studentLogin,
-  changePassword
+  changePassword,
+  getProfile
 
 
 };
