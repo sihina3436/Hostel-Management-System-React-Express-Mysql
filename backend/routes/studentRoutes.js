@@ -3,7 +3,7 @@ const router = express.Router();
 const studentController = require("../controllers/students.controller");
 const { authenticateStudent, verifyStudentOwnership } = require("../middleware/studentAuth");
 
-// Login (Public)
+// Login
 router.post("/login", studentController.studentLogin); // tested ☑️
 
 // Authenticated routes

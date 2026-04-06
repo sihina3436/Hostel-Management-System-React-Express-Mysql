@@ -1,14 +1,13 @@
-// controllers/students.controller.js
+
 const Student = require("../models/student.model");
 const Bill = require("../models/bill.model");
-const Rooms = require("../models/room.model");  // ✅ updated import name
+const Rooms = require("../models/room.model");  
 const Hostel = require("../models/hostel.model");
 const sequelize = require("../configurations/dbconnection");
 const jwt = require("jsonwebtoken");
 
-// ===============================
+
 // Student Login
-// ===============================
 async function studentLogin(req, res) {
   try {
     const { email, password } = req.body;
@@ -53,7 +52,7 @@ async function studentLogin(req, res) {
     res.status(500).json({ success: false, message: "Error during login", error: error.message });
   }
 }
-
+// Change Password
 async function changePassword(req, res) {
   try {
     const {stud_id, currentPassword, newPassword } = req.body;
@@ -100,7 +99,7 @@ async function changePassword(req, res) {
     });
   }
 }
-
+// get Student Profile
 async function getProfile(req, res) {
   try {
     const studentId = req.params.id;
@@ -121,10 +120,7 @@ async function getProfile(req, res) {
   }
 };
 
-
-// ===============================
 // Update Student Profile
-// ===============================
  async function updateProfile (req, res)  {
   try {
     const studentId = req.params.id;
@@ -169,9 +165,7 @@ async function getProfile(req, res) {
   }
 };
 
-// ===============================
 // Get Student Room Details + Roommates
-// ===============================
 async function getMyRoom(req, res) {
   try {
     const studentId = req.params.id
@@ -225,10 +219,7 @@ async function getMyRoom(req, res) {
   }
 }
 
-
-// ===============================
 // Make Annual Payment
-// ===============================
 async function makePayment (req, res) {
   try {
     const studentId = req.params.id ? parseInt(req.params.id, 10) : (req.user?.stud_id || req.user?.id);
@@ -266,9 +257,7 @@ async function makePayment (req, res) {
   }
 };
 
-// ===============================
 // Get Student Dashboard
-// ===============================
 async function getDashboard(req, res) {
   try {
     const studentId = req.params.id ? parseInt(req.params.id, 10) : (req.user?.stud_id || req.user?.id);
@@ -326,9 +315,6 @@ async function getDashboard(req, res) {
     res.status(500).json({ success: false, message: "Error fetching dashboard data", error: error.message });
   }
 }
-
-
-
 
 module.exports = {
   studentLogin,
