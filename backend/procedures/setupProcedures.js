@@ -25,7 +25,7 @@ async function createAssignStudentProcedure() {
     `;
 
     await sequelize.query(procedureSQL);
-    console.log("✅ Procedure 'AssignStudentToRoom' created successfully!");
+    console.log(" Procedure 'AssignStudentToRoom' created successfully!");
 
 
     const GetStudentProfileProcedureSQL = `
@@ -58,7 +58,7 @@ async function createAssignStudentProcedure() {
     `;
    
     await sequelize.query(GetStudentProfileProcedureSQL);
-    console.log("✅ Procedure 'GetStudentProfile' created successfully!");
+    console.log(" Procedure 'GetStudentProfile' created successfully!");
 
     const UpdateStudentProfile = `
         CREATE PROCEDURE UpdateStudentProfile(
@@ -89,7 +89,7 @@ async function createAssignStudentProcedure() {
     END ;
 `;
     await sequelize.query(UpdateStudentProfile);
-    console.log("✅ Procedure 'UpdateStudentProfile' created successfully!");
+    console.log(" Procedure 'UpdateStudentProfile' created successfully!");
 
 const GetStudentsInSameRoom = `
 CREATE PROCEDURE GetStudentsInSameRoom(IN input_student_id INT)
@@ -126,7 +126,7 @@ END
 `;
 
 await sequelize.query(GetStudentsInSameRoom, { raw: true });
-console.log("✅ Procedure 'GetStudentsInSameRoom' created successfully!");
+console.log(" Procedure 'GetStudentsInSameRoom' created successfully!");
 
 
     const MakeStudentPayment =`
@@ -138,27 +138,27 @@ console.log("✅ Procedure 'GetStudentsInSameRoom' created successfully!");
     BEGIN
         DECLARE v_student_exists INT;
 
-        -- ✅ Validate student existence
+        --  Validate student existence
         SELECT COUNT(*) INTO v_student_exists 
         FROM students 
         WHERE stud_id = p_student_id;
 
         IF v_student_exists = 0 THEN
             SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = '❌ Student not found';
+            SET MESSAGE_TEXT = ' Student not found';
         END IF;
 
-        -- ✅ Validate payment amount
+        --  Validate payment amount
         IF p_amount <= 0 THEN
             SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = '❌ Invalid payment amount';
+            SET MESSAGE_TEXT = ' Invalid payment amount';
         END IF;
 
-        -- ✅ Insert new payment
+        --  Insert new payment
         INSERT INTO bills (student_id, staff_id, amount, date)
         VALUES (p_student_id, p_staff_id, p_amount, NOW());
 
-        -- ✅ Return inserted payment record
+        --  Return inserted payment record
         SELECT 
             b.bill_id,
             b.student_id,
@@ -176,11 +176,11 @@ console.log("✅ Procedure 'GetStudentsInSameRoom' created successfully!");
     `;
 
     await sequelize.query(MakeStudentPayment);
-    console.log("✅ Procedure 'MakeStudentPayment' created successfully!");
+    console.log(" Procedure 'MakeStudentPayment' created successfully!");
 
 
   } catch (error) {
-    console.error("❌ Error creating procedure:", error.message);
+    console.error(" Error creating procedure:", error.message);
   }
 }
 

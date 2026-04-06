@@ -14,7 +14,7 @@ async function createRoomCapacityTrigger() {
         SELECT COUNT(*) INTO student_count FROM students WHERE room_id = NEW.room_id;
         IF student_count >= 4 THEN
           SIGNAL SQLSTATE '45000'
-          SET MESSAGE_TEXT = '❌ Room capacity reached (max 4 students allowed)';
+          SET MESSAGE_TEXT = ' Room capacity reached (max 4 students allowed)';
         END IF;
       END;
     `;
@@ -22,7 +22,7 @@ async function createRoomCapacityTrigger() {
     await sequelize.query(triggerSQL);
     console.log("✅ Trigger 'check_room_capacity' created successfully!");
   } catch (error) {
-    console.error("❌ Error creating trigger:", error.message);
+    console.error("Error creating trigger:", error.message);
   }
 }
 
