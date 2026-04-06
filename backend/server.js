@@ -15,9 +15,9 @@ require("./models/staff.model");
 
 
 // Import setup scripts (functions only)
-const { createAssignStudentProcedure } = require("./procedures/setupProcedures");
-const { createRoomCapacityTrigger } = require("./triggers/setupTriggers");
-const { createViews } = require("./views/setupViews");
+const { createAssignStudentProcedure } = require("../backend/procedures/setupProcedures.js");
+const { createRoomCapacityTrigger } = require("../backend/triggers/setupTriggers.js");
+const { createViews } = require("../backend/views/setupViews.js");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,11 +25,17 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
-const studentRoutes = require("./routes/studentRoutes.js");
-const adminRoutes = require("./routes/adminRoutes.js");
+const cors = require("cors");
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
+
+
+const studentRoutes = require("../backend/routes/studentRoutes.js");
+const adminRoutes = require("../backend/routes/admin.routes.js");
 
 app.use("/api/admins", adminRoutes);
-
 app.use("/api/students", studentRoutes);
 
 // Test route
