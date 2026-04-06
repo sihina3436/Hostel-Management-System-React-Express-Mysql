@@ -8,7 +8,7 @@ async function createViews() {
     // Drop old views safely
     await sequelize.query("DROP VIEW IF EXISTS AvailableRoomsView;");
     await sequelize.query("DROP VIEW IF EXISTS RevenueReportView;");
-    
+    await sequelize.query("DROP VIEW IF EXISTS room_assignments_view;");
 
     // ✅ 1️⃣ Available Rooms View
     const availableRoomsView = `
@@ -42,7 +42,28 @@ async function createViews() {
     console.log("✅ View 'RevenueReportView' created successfully!");
 
     // ✅ 3️⃣ Room Assignment View
-
+    const roomAssignmentsView = `
+      CREATE VIEW room_assignments_view AS
+      SELECT
+        h.hostel_id,
+        h.host_name AS hostel_name,
+        h.address AS hostel_address,
+        r.room_id,
+        r.room_no,
+        r.floor_no,
+        r.is_occupied,
+        s.stud_id AS student_id,
+        s.name AS student_name,
+        s.email,
+        s.phone_no
+      FROM
+        hostels h
+      JOIN rooms r ON h.hostel_id = r.hostel_id
+      LEFT JOIN students s ON r.room_id = s.room_id
+      ORDER BY h.host_name, r.room_no;
+    `;
+    await sequelize.query(roomAssignmentsView);
+    console.log("✅ View 'room_assignments_view' created successfully!");
 
     console.log("🎯 All SQL Views created successfully!");
   } catch (error) {
