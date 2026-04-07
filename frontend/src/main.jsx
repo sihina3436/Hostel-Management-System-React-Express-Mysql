@@ -1,12 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import "remixicon/fonts/remixicon.css";
-import { RouterProvider } from 'react-router-dom'
-import Router from './Routes/Router.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={Router} />
-  </StrictMode>,
-)
+import { store } from "./redux/store.js"; // ✅ named import
+import Router from "./Routes/Router.jsx";
+import "remixicon/fonts/remixicon.css";
+import "./index.css";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={Router} />
+    </Provider>
+  </React.StrictMode>
+);
+
